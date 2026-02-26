@@ -44,3 +44,11 @@ app-example
 
 # Env
 .env
+
+# logs and error files
+*.log
+tsc_*.log
+lint_*.txt
+tsc_errors.txt
+lint_output.txt
+lint_errors.txt
