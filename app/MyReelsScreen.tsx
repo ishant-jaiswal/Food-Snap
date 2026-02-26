@@ -11,96 +11,96 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 
-const MyReelItem = React.memo(
-    ({ item, index, isActive, containerHeight, onDelete }: any) => {
-        const insets = useSafeAreaInsets();
-        const [isPlaying, setIsPlaying] = useState(true);
+const MyReelItem = React.memo(function MyReelItem(
+    { item, index, isActive, containerHeight, onDelete }: any) {
+    const insets = useSafeAreaInsets();
+    const [isPlaying, setIsPlaying] = useState(true);
 
-        const player = useVideoPlayer(item.videoUrl, (player) => {
-            player.loop = true;
-        });
+    const player = useVideoPlayer(item.videoUrl, (player) => {
+        player.loop = true;
+    });
 
-        useEffect(() => {
-            if (!player) return;
-            if (isActive) {
-                player.play();
-                setIsPlaying(true);
-            } else {
+    useEffect(() => {
+        if (!player) return;
+        if (isActive) {
+            player.play();
+            setIsPlaying(true);
+        } else {
+            player.pause();
+            setIsPlaying(false);
+        }
+    }, [isActive, player]);
+
+    const togglePlayback = () => {
+        setIsPlaying((prev) => {
+            if (prev) {
                 player.pause();
-                setIsPlaying(false);
+                return false;
+            } else {
+                player.play();
+                return true;
             }
-        }, [isActive, player]);
+        });
+    };
 
-        const togglePlayback = () => {
-            setIsPlaying((prev) => {
-                if (prev) {
-                    player.pause();
-                    return false;
-                } else {
-                    player.play();
-                    return true;
+    const handleDelete = () => {
+        Alert.alert(
+            "Delete Reel",
+            "Are you sure you want to delete this reel? This action cannot be undone.",
+            [
+                { text: "Cancel", style: "cancel" },
+                {
+                    text: "Delete",
+                    style: "destructive",
+                    onPress: () => onDelete(item.id)
                 }
-            });
-        };
-
-        const handleDelete = () => {
-            Alert.alert(
-                "Delete Reel",
-                "Are you sure you want to delete this reel? This action cannot be undone.",
-                [
-                    { text: "Cancel", style: "cancel" },
-                    {
-                        text: "Delete",
-                        style: "destructive",
-                        onPress: () => onDelete(item.id)
-                    }
-                ]
-            );
-        };
-
-        return (
-            <View style={[styles.reelContainer, { height: containerHeight }]}>
-                <Pressable onPress={togglePlayback} style={StyleSheet.absoluteFill}>
-                    <VideoView
-                        player={player}
-                        style={StyleSheet.absoluteFill}
-                        contentFit="cover"
-                        nativeControls={false}
-                    />
-                    {!isPlaying && (
-                        <View style={styles.pauseOverlay} pointerEvents="none">
-                            <Feather name="play" size={50} color="rgba(255,255,255,0.7)" />
-                        </View>
-                    )}
-                </Pressable>
-
-                {/* Delete Button */}
-                <Pressable style={[styles.deleteButton, { top: insets.top + Spacing.md }]} onPress={handleDelete}>
-                    <Feather name="trash-2" size={24} color="#FFF" />
-                </Pressable>
-
-                {/* User Info */}
-                <View style={[styles.userInfo, { bottom: Spacing.xl }]}>
-                    <View style={styles.userRow}>
-                        <View style={styles.avatarContainer}>
-                            {item.userProfileImage ? (
-                                <Image
-                                    source={{ uri: item.userProfileImage }}
-                                    style={styles.avatar}
-                                />
-                            ) : (
-                                <Feather name="user" size={20} color="#FFF" />
-                            )}
-                        </View>
-                        <ThemedText style={styles.username}>@{item.username}</ThemedText>
-                    </View>
-                    <ThemedText style={styles.caption} numberOfLines={2}>
-                        {item.caption}
-                    </ThemedText>
-                </View>
-            </View>
+            ]
         );
-    }
+    };
+
+    return (
+        <View style={[styles.reelContainer, { height: containerHeight }]}>
+            <Pressable onPress={togglePlayback} style={StyleSheet.absoluteFill}>
+                <VideoView
+                    player={player}
+                    style={StyleSheet.absoluteFill}
+                    contentFit="cover"
+                    nativeControls={false}
+                />
+                {!isPlaying && (
+                    <View style={styles.pauseOverlay} pointerEvents="none">
+                        <Feather name="play" size={50} color="rgba(255,255,255,0.7)" />
+                    </View>
+                )}
+            </Pressable>
+
+            {/* Delete Button */}
+            <Pressable style={[styles.deleteButton, { top: insets.top + Spacing.md }]} onPress={handleDelete}>
+                <Feather name="trash-2" size={24} color="#FFF" />
+            </Pressable>
+
+            {/* User Info */}
+            <View style={[styles.userInfo, { bottom: Spacing.xl }]}>
+                <View style={styles.userRow}>
+                    <View style={styles.avatarContainer}>
+                        {item.userProfileImage ? (
+                            <Image
+                                source={{ uri: item.userProfileImage }}
+                                style={styles.avatar}
+                            />
+                        ) : (
+                            <Feather name="user" size={20} color="#FFF" />
+                        )}
+                    </View>
+                    <ThemedText style={styles.username}>@{item.username}</ThemedText>
+                </View>
+                <ThemedText style={styles.caption} numberOfLines={2}>
+                    {item.caption}
+                </ThemedText>
+            </View>
+        </View>
+    );
+}
 );
 
 export default function MyReelsScreen() {

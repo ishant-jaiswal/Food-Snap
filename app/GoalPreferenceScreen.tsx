@@ -139,7 +139,7 @@ export default function GoalPreferenceScreen() {
           </View>
         </Pressable>
 
-        <ThemedText style={styles.sectionTitle}>What's your goal?</ThemedText>
+        <ThemedText style={styles.sectionTitle}>What&apos;s your goal?</ThemedText>
         <ThemedText style={[styles.sectionSubtitle, { color: theme.textSecondary }]}>
           Select your primary health objective
         </ThemedText>

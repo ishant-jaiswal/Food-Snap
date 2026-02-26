@@ -157,7 +157,7 @@ export default function HomeScreen() {
         </View>
 
         <View style={[styles.card, { backgroundColor: theme.card }]}>
-          <ThemedText style={styles.sectionTitle}>Today's Nutrition</ThemedText>
+          <ThemedText style={styles.sectionTitle}>Today&apos;s Nutrition</ThemedText>
           <View style={styles.nutritionGrid}>
             <View style={styles.nutritionItem}>
               <CircularProgress

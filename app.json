@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "MajorProject",
+    "name": "FitBite",
     "slug": "MajorProject",
     "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/fitbite-icon.png",
     "scheme": "foodsnap",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -15,7 +15,7 @@
       "package": "com.majorproject.app",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "foregroundImage": "./assets/images/fitbite-icon.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
@@ -23,12 +23,12 @@
       "predictiveBackGestureEnabled": false
     },
     "notification": {
-      "icon": "./assets/images/icon.png",
+      "icon": "./assets/images/fitbite-icon.png",
       "color": "#ffffff"
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/fitbite-icon.png"
     },
     "plugins": [
       "expo-router",

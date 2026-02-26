@@ -36,7 +36,7 @@ export default function CreateChallengeScreen() {
                 target: Number(target),
                 duration: Number(duration),
                 type,
-                creatorId: user?.uid,
+                creatorId: user?.id,
                 isPrivate: true, // Pro challenges are private by default implies custom
             });
             Alert.alert("Success", "Challenge created!");
@@ -54,13 +54,13 @@ export default function CreateChallengeScreen() {
                 <Pressable onPress={() => router.back()} style={styles.backButton}>
                     <Feather name="arrow-left" size={24} color={theme.text} />
                 </Pressable>
-                <ThemedText style={styles.headerTitle} type="title">Create Challenge</ThemedText>
+                <ThemedText style={styles.headerTitle} type="h2">Create Challenge</ThemedText>
             </View>
 
             <ScrollView contentContainerStyle={styles.content}>
                 <ThemedText style={styles.label}>Challenge Name</ThemedText>
                 <TextInput
-                    style={[styles.input, { backgroundColor: theme.surface, color: theme.text, borderColor: theme.border }]}
+                    style={[styles.input, { backgroundColor: theme.card, color: theme.text, borderColor: theme.border }]}
                     placeholder="e.g. Office Step Comp"
                     placeholderTextColor={theme.textSecondary}
                     value={name}
@@ -69,7 +69,7 @@ export default function CreateChallengeScreen() {
 
                 <ThemedText style={styles.label}>Description</ThemedText>
                 <TextInput
-                    style={[styles.input, styles.textArea, { backgroundColor: theme.surface, color: theme.text, borderColor: theme.border }]}
+                    style={[styles.input, styles.textArea, { backgroundColor: theme.card, color: theme.text, borderColor: theme.border }]}
                     placeholder="What's the goal?"
                     placeholderTextColor={theme.textSecondary}
                     value={description}
@@ -85,7 +85,7 @@ export default function CreateChallengeScreen() {
                             style={[
                                 styles.typeChip,
                                 type === t && { backgroundColor: Colors.light.primary, borderColor: Colors.light.primary },
-                                type !== t && { borderColor: theme.border, backgroundColor: theme.surface }
+                                type !== t && { borderColor: theme.border, backgroundColor: theme.card }
                             ]}
                             onPress={() => setType(t)}
                         >
@@ -102,7 +102,7 @@ export default function CreateChallengeScreen() {
 
                 <ThemedText style={styles.label}>Target ({type})</ThemedText>
                 <TextInput
-                    style={[styles.input, { backgroundColor: theme.surface, color: theme.text, borderColor: theme.border }]}
+                    style={[styles.input, { backgroundColor: theme.card, color: theme.text, borderColor: theme.border }]}
                     placeholder="e.g. 10000"
                     placeholderTextColor={theme.textSecondary}
                     value={target}
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         padding: Spacing.lg,
     },
     label: {
-        ...Typography.subtitle,
+        ...Typography.h4,
         marginBottom: Spacing.xs,
         marginTop: Spacing.md,
     },
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
         padding: Spacing.md,
         borderRadius: BorderRadius.full,
         alignItems: 'center',
-        ...Shadows.md,
+        ...Shadows.medium,
     },
     disabledButton: {
         opacity: 0.7,

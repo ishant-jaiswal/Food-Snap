@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import * as FileSystem from 'expo-file-system/legacy';
 
 // Initialize Gemini
-const API_KEY = "AIzaSyD0gNI_cf-XAinJX8_w1l795nf9xhQv5gQ";
+const API_KEY = "AIzaSyAu4qOxBl2LArjlcBK6WdWyca5T5AKCvlo";
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 export const generateText = async (prompt: string): Promise<string> => {

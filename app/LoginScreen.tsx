@@ -143,7 +143,7 @@ export default function LoginScreen() {
         </View>
 
         <View style={styles.signupPrompt}>
-          <ThemedText style={{ color: theme.textSecondary }}>Don't have an account? </ThemedText>
+          <ThemedText style={{ color: theme.textSecondary }}>Don&apos;t have an account? </ThemedText>
           <Pressable onPress={() => navigation.navigate("Signup")}>
             <ThemedText style={[styles.signupLink, { color: Colors.light.primary }]}>Sign Up</ThemedText>
           </Pressable>

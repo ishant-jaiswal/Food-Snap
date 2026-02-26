@@ -225,7 +225,7 @@ export default function ScanFoodScreen() {
                             <View style={styles.errorContainer}>
                                 <Feather name="help-circle" size={48} color={theme.textSecondary} />
                                 <ThemedText style={styles.errorTitle}>Product Not Found</ThemedText>
-                                <ThemedText style={styles.errorText}>We couldn't find details for this barcode.</ThemedText>
+                                <ThemedText style={styles.errorText}>We couldn&apos;t find details for this barcode.</ThemedText>
                             </View>
                         )}
 

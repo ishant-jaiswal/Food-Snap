@@ -474,7 +474,7 @@ const styles = StyleSheet.create({
         gap: 8
     },
     sectionTitle: {
-        ...Typography.bodyLarge,
+        ...Typography.bodyMedium,
         fontWeight: '700',
     },
     macroRow: {

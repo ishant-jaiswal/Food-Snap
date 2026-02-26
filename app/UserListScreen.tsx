@@ -44,8 +44,9 @@ export default function UserListScreen() {
         if (currentUser?.id) {
             const statusMap: { [key: string]: boolean } = {};
             for (const user of fetchedUsers) {
-                const following = await isFollowing(currentUser.id, user.id);
-                statusMap[user.id] = following;
+                // @ts-ignore
+                const following = await isFollowing(currentUser, user.id);
+                statusMap[user.id] = following ?? false;
             }
             setFollowingStatus(statusMap);
         }

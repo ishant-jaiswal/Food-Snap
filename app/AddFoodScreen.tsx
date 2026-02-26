@@ -376,7 +376,7 @@ export default function AddFoodScreen() {
                             <ThemedText style={{ marginTop: 16, color: theme.textSecondary }}>Searching...</ThemedText>
                         </View>
                     ) : searchResults.length === 0 ? (
-                        <ThemedText style={{ color: theme.textSecondary, textAlign: 'center', marginTop: 20 }}>No results found for "{searchText}"</ThemedText>
+                        <ThemedText style={{ color: theme.textSecondary, textAlign: 'center', marginTop: 20 }}>No results found for &quot;{searchText}&quot;</ThemedText>
                     ) : (
                         searchResults.map((item) => (
                             <Pressable
@@ -460,7 +460,7 @@ export default function AddFoodScreen() {
                             <Feather name="search" size={16} color="#FFF" />
                         </View>
                         <ThemedText style={{ ...Typography.bodyMedium, color: Colors.light.primary, fontWeight: 'bold' }}>
-                            Search for "{searchText}"
+                            Search for &quot;{searchText}&quot;
                         </ThemedText>
                     </Pressable>
 

@@ -1,0 +1,114 @@
+env: load .env
+env: export EXPO_PUBLIC_FIREBASE_API_KEY EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN EXPO_PUBLIC_FIREBASE_PROJECT_ID EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID EXPO_PUBLIC_FIREBASE_APP_ID EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
+
+D:\MajorProject\app\AddFoodScreen.tsx
+   41:8    warning  React Hook React.useEffect has a missing dependency: 'loadMyMeals'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   73:18   warning  'error' is defined but never used                                                                                     @typescript-eslint/no-unused-vars
+  379:133  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                       react/no-unescaped-entities
+  379:146  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                       react/no-unescaped-entities
+  463:40   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                       react/no-unescaped-entities
+  463:53   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                       react/no-unescaped-entities
+
+D:\MajorProject\app\ChallengesScreen.tsx
+  47:20  warning  'isDark' is assigned a value but never used                                                                            @typescript-eslint/no-unused-vars
+  48:11  warning  'insets' is assigned a value but never used                                                                            @typescript-eslint/no-unused-vars
+  63:8   warning  React Hook useEffect has a missing dependency: 'checkDailyProgress'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  85:13  warning  'hasUpdates' is assigned a value but never used                                                                        @typescript-eslint/no-unused-vars
+  86:15  warning  'updatedChallenges' is assigned a value but never used                                                                 @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\CreateChallengeScreen.tsx
+  13:20  warning  'isDark' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  21:22  warning  'setDuration' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  44:18  warning  'error' is defined but never used                 @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\CreateMealScreen.tsx
+  43:13  warning  'theme' is assigned a value but never used   @typescript-eslint/no-unused-vars
+  46:11  warning  'router' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  47:11  warning  'params' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\CreateReelScreen.tsx
+   30:18  warning  'isDark' is assigned a value but never used                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   53:6   warning  React Hook useEffect has missing dependencies: 'cameraPermission?.granted', 'microphonePermission?.granted', 'requestCameraPermission', and 'requestMicrophonePermission'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  151:14  warning  'error' is defined but never used                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\DiaryScreen.tsx
+  16:18  warning  'isDark' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\EditProfileScreen.tsx
+  22:18  warning  'isDark' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\FoodCaptureScreen.tsx
+  32:18  warning  'isDark' is assigned a value but never used                                                                           @typescript-eslint/no-unused-vars
+  45:6   warning  React Hook useEffect has a missing dependency: 'requestPermission'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\MajorProject\app\FoodLogScreen.tsx
+  29:11  warning  'navigation' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\GoalPreferenceScreen.tsx
+   39:9   warning  'headerHeight' is assigned a value but never used                @typescript-eslint/no-unused-vars
+   91:16  warning  'error' is defined but never used                                @typescript-eslint/no-unused-vars
+  142:53  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\MajorProject\app\HomeScreen.tsx
+   55:6   warning  React Hook useEffect has a missing dependency: 'today'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  160:56  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                           react/no-unescaped-entities
+
+D:\MajorProject\app\LoginScreen.tsx
+  146:65  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+D:\MajorProject\app\ManualFoodEntryScreen.tsx
+  23:20  warning  'isDark' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  62:18  warning  'error' is defined but never used            @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\MyReelsScreen.tsx
+   14:20  error    Component definition is missing display name                                                                  react/display-name
+  121:8   warning  React Hook useEffect has a missing dependency: 'loadReels'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  138:18  warning  'error' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\PhotoOutputScreen.tsx
+  55:6  warning  React Hook useEffect has a missing dependency: 'analyzeImage'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\MajorProject\app\ProfileScreen.tsx
+  47:18  warning  'isDark' is assigned a value but never used                                                                     @typescript-eslint/no-unused-vars
+  68:6   warning  React Hook useEffect has a missing dependency: 'loadMyReels'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\MajorProject\app\RecipeGeneratorScreen.tsx
+  23:9   warning  'width' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  26:20  warning  'isDark' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  28:11  warning  'insets' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  35:12  warning  'analyzing' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  61:22  warning  'error' is defined but never used               @typescript-eslint/no-unused-vars
+  93:18  warning  'e' is defined but never used                   @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\ReelsScreen.tsx
+   33:24  warning  'SCREEN_HEIGHT' is assigned a value but never used                                                                                             @typescript-eslint/no-unused-vars
+   50:7   warning  'reelsData' is assigned a value but never used                                                                                                 @typescript-eslint/no-unused-vars
+   93:18  error    Component definition is missing display name                                                                                                   react/display-name
+  130:8   warning  React Hook useEffect has missing dependencies: 'player.currentTime' and 'player.duration'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  162:9   warning  Expected an assignment or function call and instead saw an expression                                                                          no-unused-expressions
+  291:7   warning  'ReelSkeleton' is assigned a value but never used                                                                                              @typescript-eslint/no-unused-vars
+  292:9   warning  'insets' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\ScanFoodScreen.tsx
+   15:20  warning  'isDark' is assigned a value but never used                                                                           @typescript-eslint/no-unused-vars
+   34:8   warning  React Hook useEffect has a missing dependency: 'requestPermission'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   55:18  warning  'error' is defined but never used                                                                                     @typescript-eslint/no-unused-vars
+  228:79  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                       react/no-unescaped-entities
+
+D:\MajorProject\app\SingleReelScreen.tsx
+  14:9   warning  'width' is assigned a value but never used                                                                   @typescript-eslint/no-unused-vars
+  14:16  warning  'height' is assigned a value but never used                                                                  @typescript-eslint/no-unused-vars
+  22:13  warning  'user' is assigned a value but never used                                                                    @typescript-eslint/no-unused-vars
+  36:8   warning  React Hook useEffect has a missing dependency: 'loadReel'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\MajorProject\app\SplashScreen.tsx
+  17:9  warning  'width' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\MajorProject\app\UserListScreen.tsx
+  32:8  warning  React Hook useEffect has a missing dependency: 'loadUsers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\MajorProject\components\KeyboardAwareScrollViewCompat.tsx
+  5:8  error  Unable to resolve path to module 'react-native-keyboard-controller'  import/no-unresolved
+
+✖ 63 problems (11 errors, 52 warnings)
+

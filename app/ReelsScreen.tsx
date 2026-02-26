@@ -90,201 +90,201 @@ const reelsData: Reel[] = [
 ];
 
 // Separate component for each reel to manage its own video player state
-const ReelItem = React.memo(
-  ({ item, index, isActive, containerHeight, navigation, toggleLike, isLiked, openComments, currentUser }: any) => {
-    const insets = useSafeAreaInsets();
-    const tabBarHeight = useBottomTabBarHeight();
+const ReelItem = React.memo(function ReelItem(
+  { item, index, isActive, containerHeight, navigation, toggleLike, isLiked, openComments, currentUser }: any) {
+  const insets = useSafeAreaInsets();
+  const tabBarHeight = useBottomTabBarHeight();
 
-    const [isFollowingUser, setIsFollowingUser] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(true);
-    const [progress, setProgress] = useState(0);
+  const [isFollowingUser, setIsFollowingUser] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [progress, setProgress] = useState(0);
 
-    // ✅ Initialize player ONCE – no play/pause logic here
-    const player = useVideoPlayer(item.videoUrl);
+  // ✅ Initialize player ONCE – no play/pause logic here
+  const player = useVideoPlayer(item.videoUrl);
 
-    // ✅ SINGLE source of truth for auto play / pause
-    useEffect(() => {
-      player.loop = true;
-      if (isActive) {
-        player.play();
-        setIsPlaying(true);
-      } else {
-        player.pause();
-        setIsPlaying(false);
-      }
-    }, [isActive, player]);
+  // ✅ SINGLE source of truth for auto play / pause
+  useEffect(() => {
+    player.loop = true;
+    if (isActive) {
+      player.play();
+      setIsPlaying(true);
+    } else {
+      player.pause();
+      setIsPlaying(false);
+    }
+  }, [isActive, player]);
 
-    // ✅ Track progress safely
-    useEffect(() => {
-      let interval: any;
+  // ✅ Track progress safely
+  useEffect(() => {
+    let interval: any;
 
-      if (isActive && isPlaying) {
-        interval = setInterval(() => {
-          if (player.duration > 0) {
-            setProgress(player.currentTime / player.duration);
-          }
-        }, 250);
-      }
-
-      return () => interval && clearInterval(interval);
-    }, [isActive, isPlaying]);
-
-    // ✅ Tap to toggle play / pause (WORKING)
-    const togglePlayback = () => {
-      setIsPlaying((prev) => {
-        if (prev) {
-          player.pause();
-          return false;
-        } else {
-          player.play();
-          return true;
+    if (isActive && isPlaying) {
+      interval = setInterval(() => {
+        if (player.duration > 0) {
+          setProgress(player.currentTime / player.duration);
         }
+      }, 250);
+    }
+
+    return () => interval && clearInterval(interval);
+  }, [isActive, isPlaying]);
+
+  // ✅ Tap to toggle play / pause (WORKING)
+  const togglePlayback = () => {
+    setIsPlaying((prev) => {
+      if (prev) {
+        player.pause();
+        return false;
+      } else {
+        player.play();
+        return true;
+      }
+    });
+  };
+
+  // Follow status
+  useEffect(() => {
+    if (currentUser && item.userId && currentUser.id !== item.userId) {
+      setIsFollowingUser(isFollowing(currentUser, item.userId) || false);
+    }
+  }, [currentUser, item.userId]);
+
+  const handleFollow = async () => {
+    if (!currentUser?.id) {
+      Alert.alert("Sign In Required", "Please sign in to follow users.");
+      return;
+    }
+
+    const next = !isFollowingUser;
+    setIsFollowingUser(next);
+
+    try {
+      next
+        ? await followUser(currentUser.id, item.userId)
+        : await unfollowUser(currentUser.id, item.userId);
+    } catch {
+      setIsFollowingUser(!next);
+    }
+  };
+
+  const handleShare = async () => {
+    try {
+      const url = Linking.createURL(`reel/${item.id}`, { scheme: 'foodsnap' });
+      await Share.share({
+        message: `Check out this reel by @${item.username}: ${url}`,
       });
-    };
+      await incrementShareCount(item.id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    // Follow status
-    useEffect(() => {
-      if (currentUser && item.userId && currentUser.id !== item.userId) {
-        setIsFollowingUser(isFollowing(currentUser, item.userId) || false);
-      }
-    }, [currentUser, item.userId]);
-
-    const handleFollow = async () => {
-      if (!currentUser?.id) {
-        Alert.alert("Sign In Required", "Please sign in to follow users.");
-        return;
-      }
-
-      const next = !isFollowingUser;
-      setIsFollowingUser(next);
-
-      try {
-        next
-          ? await followUser(currentUser.id, item.userId)
-          : await unfollowUser(currentUser.id, item.userId);
-      } catch {
-        setIsFollowingUser(!next);
-      }
-    };
-
-    const handleShare = async () => {
-      try {
-        const url = Linking.createURL(`reel/${item.id}`, { scheme: 'foodsnap' });
-        await Share.share({
-          message: `Check out this reel by @${item.username}: ${url}`,
-        });
-        await incrementShareCount(item.id);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    return (
-      <View style={[styles.reelContainer, { height: containerHeight }]}>
-        {/* VIDEO */}
-        <Pressable onPress={togglePlayback} style={StyleSheet.absoluteFill}>
-          <VideoView
-            player={player}
-            style={StyleSheet.absoluteFill}
-            contentFit="cover"
-            nativeControls={false}
-          />
-
-          {/* PLAY ICON */}
-          {!isPlaying && (
-            <View style={styles.pauseOverlay} pointerEvents="none">
-              <Feather name="play" size={50} color="rgba(255,255,255,0.7)" />
-            </View>
-          )}
-        </Pressable>
-
-        <LinearGradient
-          colors={["rgba(0,0,0,0.3)", "transparent", "transparent", "rgba(0,0,0,0.8)"]}
+  return (
+    <View style={[styles.reelContainer, { height: containerHeight }]}>
+      {/* VIDEO */}
+      <Pressable onPress={togglePlayback} style={StyleSheet.absoluteFill}>
+        <VideoView
+          player={player}
           style={StyleSheet.absoluteFill}
+          contentFit="cover"
+          nativeControls={false}
         />
 
-        {/* TOP BAR */}
-        <View style={[styles.topBar, { paddingTop: insets.top + Spacing.sm }]}>
-          <ThemedText style={styles.headerTitle}>Diet Reels</ThemedText>
-          <Pressable onPress={() => navigation.navigate("CreateReel")} style={styles.cameraButton}>
-            <Feather name="plus-square" size={28} color="#FFF" />
-          </Pressable>
-        </View>
+        {/* PLAY ICON */}
+        {!isPlaying && (
+          <View style={styles.pauseOverlay} pointerEvents="none">
+            <Feather name="play" size={50} color="rgba(255,255,255,0.7)" />
+          </View>
+        )}
+      </Pressable>
 
-        {/* RIGHT ACTIONS */}
-        <View style={[styles.rightColumn, { bottom: tabBarHeight + Spacing.xl }]}>
-          <Pressable style={styles.actionButton} onPress={() => toggleLike(item)}>
-            <Feather name="heart" size={30} color={isLiked ? "#FF4757" : "#FFF"} />
-            <ThemedText style={styles.actionCount}>{item.likesCount}</ThemedText>
-          </Pressable>
+      <LinearGradient
+        colors={["rgba(0,0,0,0.3)", "transparent", "transparent", "rgba(0,0,0,0.8)"]}
+        style={StyleSheet.absoluteFill}
+      />
 
-          <Pressable style={styles.actionButton} onPress={() => openComments(item)}>
-            <Feather name="message-circle" size={30} color="#FFF" />
-            <ThemedText style={styles.actionCount}>{item.commentsCount}</ThemedText>
-          </Pressable>
+      {/* TOP BAR */}
+      <View style={[styles.topBar, { paddingTop: insets.top + Spacing.sm }]}>
+        <ThemedText style={styles.headerTitle}>Diet Reels</ThemedText>
+        <Pressable onPress={() => navigation.navigate("CreateReel")} style={styles.cameraButton}>
+          <Feather name="plus-square" size={28} color="#FFF" />
+        </Pressable>
+      </View>
 
-          <Pressable style={styles.actionButton} onPress={handleShare}>
-            <Feather name="send" size={30} color="#FFF" />
-            <ThemedText style={styles.actionCount}>{item.sharesCount}</ThemedText>
-          </Pressable>
-        </View>
+      {/* RIGHT ACTIONS */}
+      <View style={[styles.rightColumn, { bottom: tabBarHeight + Spacing.xl }]}>
+        <Pressable style={styles.actionButton} onPress={() => toggleLike(item)}>
+          <Feather name="heart" size={30} color={isLiked ? "#FF4757" : "#FFF"} />
+          <ThemedText style={styles.actionCount}>{item.likesCount}</ThemedText>
+        </Pressable>
 
-        {/* USER INFO */}
-        <View style={[styles.userInfo, { bottom: tabBarHeight + Spacing.xl }]}>
-          <View style={styles.userRow}>
-            <View style={styles.avatar}>
-              {item.userProfileImage ? (
-                <Image
-                  source={{ uri: item.userProfileImage }}
-                  style={{ width: 32, height: 32, borderRadius: 16 }}
-                />
-              ) : (
-                <Feather name="user" size={16} color="#FFF" />
-              )}
-            </View>
+        <Pressable style={styles.actionButton} onPress={() => openComments(item)}>
+          <Feather name="message-circle" size={30} color="#FFF" />
+          <ThemedText style={styles.actionCount}>{item.commentsCount}</ThemedText>
+        </Pressable>
 
-            <ThemedText style={styles.username}>@{item.username}</ThemedText>
+        <Pressable style={styles.actionButton} onPress={handleShare}>
+          <Feather name="send" size={30} color="#FFF" />
+          <ThemedText style={styles.actionCount}>{item.sharesCount}</ThemedText>
+        </Pressable>
+      </View>
 
-            {currentUser?.id !== item.userId && (
-              <Pressable
-                onPress={handleFollow}
-                style={[styles.followButton, isFollowingUser && styles.followingButton]}
-              >
-                <ThemedText style={styles.followText}>
-                  {isFollowingUser ? "Following" : "Follow"}
-                </ThemedText>
-              </Pressable>
+      {/* USER INFO */}
+      <View style={[styles.userInfo, { bottom: tabBarHeight + Spacing.xl }]}>
+        <View style={styles.userRow}>
+          <View style={styles.avatar}>
+            {item.userProfileImage ? (
+              <Image
+                source={{ uri: item.userProfileImage }}
+                style={{ width: 32, height: 32, borderRadius: 16 }}
+              />
+            ) : (
+              <Feather name="user" size={16} color="#FFF" />
             )}
           </View>
 
-          <ThemedText style={styles.caption} numberOfLines={2}>
-            {item.caption}
-          </ThemedText>
+          <ThemedText style={styles.username}>@{item.username}</ThemedText>
 
-          {item.music && (
-            <View style={styles.musicRow}>
-              <Feather name="music" size={14} color="#FFF" />
-              <ThemedText style={styles.musicText}>{item.music}</ThemedText>
-            </View>
+          {currentUser?.id !== item.userId && (
+            <Pressable
+              onPress={handleFollow}
+              style={[styles.followButton, isFollowingUser && styles.followingButton]}
+            >
+              <ThemedText style={styles.followText}>
+                {isFollowingUser ? "Following" : "Follow"}
+              </ThemedText>
+            </Pressable>
           )}
         </View>
 
-        {/* PROGRESS BAR */}
-        <Pressable
-          style={[styles.progressBarContainer, { bottom: tabBarHeight - 2 }]}
-          onPress={(e) => {
-            const percent = e.nativeEvent.locationX / width;
-            if (player.duration > 0) {
-              player.currentTime = percent * player.duration;
-              setProgress(percent);
-            }
-          }}
-        >
-          <View style={[styles.progressBar, { width: `${progress * 100}%` }]} />
-        </Pressable>
+        <ThemedText style={styles.caption} numberOfLines={2}>
+          {item.caption}
+        </ThemedText>
+
+        {item.music && (
+          <View style={styles.musicRow}>
+            <Feather name="music" size={14} color="#FFF" />
+            <ThemedText style={styles.musicText}>{item.music}</ThemedText>
+          </View>
+        )}
       </View>
-    );
-  }
+
+      {/* PROGRESS BAR */}
+      <Pressable
+        style={[styles.progressBarContainer, { bottom: tabBarHeight - 2 }]}
+        onPress={(e) => {
+          const percent = e.nativeEvent.locationX / width;
+          if (player.duration > 0) {
+            player.currentTime = percent * player.duration;
+            setProgress(percent);
+          }
+        }}
+      >
+        <View style={[styles.progressBar, { width: `${progress * 100}%` }]} />
+      </Pressable>
+    </View>
+  );
+}
 );
 
 // Skeleton Loader Component
