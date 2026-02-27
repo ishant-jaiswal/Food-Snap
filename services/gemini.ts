@@ -4,6 +4,13 @@ import * as FileSystem from 'expo-file-system/legacy';
 
 // Initialize Gemini
 const API_KEY = process.env.EXPO_PUBLIC_GEMINI_API_KEY;
+
+if (!API_KEY) {
+    console.warn("⚠️ Gemini API Key is missing! Please check your .env file.");
+} else {
+    console.log("✅ Gemini API Key found (starts with: " + API_KEY.substring(0, 8) + "...)");
+}
+
 const genAI = new GoogleGenerativeAI(API_KEY || "");
 
 export const generateText = async (prompt: string): Promise<string> => {
@@ -130,6 +137,12 @@ export const analyzeFoodImage = async (uri: string, dietaryPreferences: string[]
         console.error("Gemini Analysis Error:", error);
         throw error;
     }
+};
+
+// Helper for Gemini (used as fallback or for other tasks)
+const analyzeFoodWithGemini = async (uri: string, dietaryPreferences: string[] = []): Promise<FoodAnalysisResult> => {
+    // ... (Original Gemini implementation can stay here if desired)
+    throw new Error("Gemini fallback not implemented");
 };
 
 export const searchFoodByName = async (query: string): Promise<FoodAnalysisResult[]> => {

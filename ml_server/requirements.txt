@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+torch
+torchvision
+pandas
+python-multipart
+kaggle
+python-dotenv
